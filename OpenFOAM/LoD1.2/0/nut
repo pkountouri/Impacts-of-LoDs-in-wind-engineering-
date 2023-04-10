@@ -1,0 +1,118 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      nut;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -1 0 0 0 0];
+
+internalField   uniform 0;
+
+boundaryField
+{
+    #include "include/ABLConditions"
+
+    N //main inlflow direction
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    W // main outflow direction
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    S // main outflow direction
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    E //main inlflow direction
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    floor
+    {
+        type            nutkz0RoughWallFunction;
+        z0              uniform 0.2929;
+        value           uniform 0;
+    }
+
+    Buildings
+    {
+        type            nutkWallFunction;
+        value           uniform 0;
+    }
+
+    top
+    {
+        type            calculated;
+        value           uniform 0;
+    }
+
+    x0
+    {
+        type            symmetry;	
+    }
+
+    y0
+    {
+        type            calculated;
+	value           uniform 0;
+    }
+
+    x1
+    {
+        type            symmetry;     
+    }
+
+    y1
+    {
+        type            calculated;
+	value           uniform 0;
+    }
+
+    
+    terrain
+    {
+        type            nutkAtmRoughWallFunction;
+        value           uniform 0;
+	z0	        uniform	0.3; // campus is located in suburban terrain 
+    }
+
+    Terrain
+    {
+        type            nutkAtmRoughWallFunction;
+        value           uniform 0;
+	z0		uniform 0.3; // suburban terrain
+    }
+
+    Vegetation
+    {
+        type            nutkAtmRoughWallFunction; 
+        value           uniform 0;
+	z0		uniform 0.03; //low vegetation (i.e grass)
+    }
+
+    sky
+    {
+        type            symmetry;
+        
+    }
+}
+// ************************************************************************* //

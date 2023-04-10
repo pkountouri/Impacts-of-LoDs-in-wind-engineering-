@@ -1,0 +1,143 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volScalarField;
+    object      epsilon;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+dimensions      [0 2 -3 0 0 0 0];
+
+#include        "include/initialConditions"
+
+internalField   uniform $turbulentEpsilon;
+
+boundaryField
+{
+    #include "include/ABLConditions"
+
+    N //main inlflow direction
+    {
+        type            atmBoundaryLayerInletEpsilon;
+    #include "include/ABLConditions"
+        value           $internalField;
+    }
+
+    E // main outlet flow direction 
+    {
+        type            zeroGradient;
+    }
+
+    S
+    {
+        type            zeroGradient;
+    }
+
+    W //main inlflow direction
+    {
+        type            atmBoundaryLayerInletEpsilon;
+    #include "include/ABLConditions"
+        value           $internalField;
+    }
+
+    floor
+    {
+        type            epsilonz0WallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+	z0   		0.2929;
+        value           $internalField;
+    }
+
+    Buildings
+    {
+        type            epsilonWallFunction;
+        Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+        value           $internalField;
+    }
+
+    top
+    {
+        type            atmBoundaryLayerInletEpsilon;
+    	#include "include/ABLConditions"
+        value           $internalField;
+    } 
+
+    x0
+    {
+        type            symmetry;
+        
+    }
+
+    y0
+    {
+        type           atmBoundaryLayerInletEpsilon;
+	#include "include/ABLConditions"
+        value           $internalField;
+
+    }
+
+    x1
+    {
+        type            symmetry;
+	
+       
+    }
+
+    y1
+    {
+        type            inletOutlet;
+	inletValue      uniform $turbulentEpsilon;
+        value           $internalField;
+
+    }
+
+    terrain
+    {
+        type            epsilonz0WallFunction;
+	Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+	z0              uniform 0.3; //located in suburban terrain 
+        value           $internalField;
+    }
+
+    Terrain
+    {
+        type            epsilonz0WallFunction;
+	Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+	z0              uniform 0.3; //located in suburban terrain
+        value           $internalField;
+    }
+    
+    Vegetation
+    {
+        type            epsilonz0WallFunction;
+	Cmu             0.09;
+        kappa           0.41;
+        E               9.8;
+	z0 		uniform 0.03; // rougness length for vegetation patches :Wq
+        value           $internalField;
+    }
+
+    sky
+    {
+        type            symmetry;
+     
+    }    
+}
+
+// ************************************************************************ //
