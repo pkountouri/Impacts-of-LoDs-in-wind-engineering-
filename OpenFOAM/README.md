@@ -33,9 +33,9 @@ To successfully run simualtions, the following steps are required:
 
 There are three main folders needed to start a simulation: 
 
-	* 0 : contains the boundary and initial conditions
-	* constant : contains files and subfolders related to the case's constant data (i.e polyMesh, transportProperties, turbulenceProperties)
-       * system : is the control folder of the simualtion
+* 0 : contains the boundary and initial conditions
+* constant : contains files and subfolders related to the case's constant data (i.e polyMesh, transportProperties, turbulenceProperties
+* system : is the control folder of the simualtion
 
 
 IMPLEMENTATION
