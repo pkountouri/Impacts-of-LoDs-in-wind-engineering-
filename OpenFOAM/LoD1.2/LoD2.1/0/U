@@ -1,0 +1,143 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  4.0                                   |
+|   \\  /    A nd           | Web:      www.OpenFOAM.org                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       volVectorField;
+    object      U;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+#include        "include/initialConditions"
+
+dimensions      [0 1 -1 0 0 0 0];
+
+internalField   uniform $flowVelocity;
+
+boundaryField
+{
+    #include "include/ABLConditions"
+
+    y0
+    {
+	#include "include/ABLConditions"
+        type            atmBoundaryLayerInletVelocity;
+        value           $internalField;
+        
+    }
+
+    x1 // main outflow direction
+    {
+        type            zeroGradient;
+    }
+
+    y1 // main outflow direction
+    {
+	type            zeroGradient;
+       
+    }
+
+    x0 //main inlflow direction
+    {
+	#include "include/ABLConditions"
+        type            atmBoundaryLayerInletVelocity;
+        value           $internalField;
+      
+    }
+
+    floor
+    {
+        type            uniformFixedValue;
+        value           uniform (0 0 0);
+        uniformValue    constant (0 0 0);
+    }
+
+    buildings
+    {
+        type            uniformFixedValue;
+        value           uniform (0 0 0);
+        uniformValue    constant (0 0 0);
+    }
+
+    top
+    {
+	#include "include/ABLConditions"
+        type            atmBoundaryLayerInletVelocity;
+        value           $internalField;
+    }
+/*
+    x0
+    {
+        
+        type            symmetry;
+       // #include        "include/ABLConditions"
+        
+    }
+
+    y0
+    {
+        #include "include/ABLConditions"
+	type            atmBoundaryLayerInletVelocity;
+        value           $internalField;
+    }
+
+    x1
+    {
+        type            symmetry;
+        
+    }
+
+    y1
+    {
+        type            inletOutlet;
+	inletValue      uniform (0 0 0);
+        value           $internalField;
+    }
+*/
+    ground
+    {
+        type            uniformFixedValue;
+        value           uniform (0 0 0);
+        uniformValue    constant (0 0 0);
+       
+    }
+
+    Terrain
+    {
+        type            uniformFixedValue;
+        value           uniform (0 0 0);
+        uniformValue    constant (0 0 0);
+       
+    }
+
+    terrain
+    {
+	type            uniformFixedValue;
+	value           uniform (0 0 0);
+	uniformValue    constant (0 0 0);
+    }
+
+
+
+    Vegetation
+    {
+        type            uniformFixedValue;
+        value           uniform (0 0 0);
+        uniformValue    constant (0 0 0);
+       
+    }
+
+    sky
+    {
+        type            symmetry;
+        
+    }
+}
+
+// ************************************************************************* //
