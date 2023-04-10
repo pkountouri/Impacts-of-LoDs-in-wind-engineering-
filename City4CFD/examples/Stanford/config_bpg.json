@@ -1,0 +1,55 @@
+{
+  "point_clouds" :
+  {
+    "ground": "point_cloud/ground_5m_6419.ply",
+    "buildings" : "point_cloud/buildings_5m_6419.ply"
+  },
+  "polygons" : [
+    {
+      "type": "Building",
+      "path": "polygons/Footprints_6419.geojson",
+      "unique_id": "gid"
+    },
+    {
+      "type": "SurfaceLayer",
+      "path": "polygons/Vegetation_6419.geojson",
+       "layer_name" : "Vegetation"
+    }
+    // {
+    //   "type":       "SurfaceLayer",
+    //   "path":       "polygons/Water.geojson",
+    //   "layer_name": "Water"
+    // }
+  ],
+  // "import_geometries": {
+  //   "path": "import_buildings/Hooever_Tower_90perc.obj",
+  //   "advantage": true,
+  //   "true_height": true  
+  // },
+
+  "point_of_interest": [1851782.8063670748, 604362.4287540396],
+  "influence_region":   5000,
+  "domain_bnd":         null,
+  "top_height":         90,
+
+  "bnd_type_bpg":      "Rectangle",
+  "bpg_blockage_ratio": false,        
+  "flow_direction":     [0, 1],
+  "buffer_region":     -20,
+  "reconstruct_boundaries": false,
+
+  "terrain_thinning": 90,
+  "smooth_terrain":   true,
+
+  "lod": "1.2",
+  "building_percentile": 95,
+
+  "edge_max_len": 2,
+
+  "output_file_name":  "Mesh",
+  "output_format":     "obj",
+  "output_separately":  true,
+
+  "output_log": true,
+  "log_file": "logFile.log"
+}
