@@ -1,0 +1,41 @@
+/*--------------------------------- C++ -----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  7
+     \\/     M anipulation  |
+-------------------------------------------------------------------------------
+Description
+    Writes out values of fields from cells nearest to specified locations.
+
+\*---------------------------------------------------------------------------*/
+
+#includeEtc "caseDicts/postProcessing/probes/probes.cfg"
+
+fields (U p);
+probeLocations
+(
+   ( 2180.24 1890.02 31.3 )       // sensor 1  -> Terrace
+   ( 2240.28 1992.57 26.1 )	// sensor 2  -> Pedestrian 
+   ( 2198.57 1942.9 50.0 )       // sensor 3  -> Roof
+   ( 2163.55 1936.9 29.0 )       // sensor 4  -> Pedestrian
+   ( 2078.91 1791.83 43.6 )       // sensor 5  -> Roof
+   ( 2339.03 1928.89 45.2 )	// sensor 6  -> Roof
+   ( 1398.8 1323.37 35 )      	// MeteoStation	
+   ( 2130.51 1948.55 25.0)        // point 1 -> under the pillars 
+   ( 2091.13 1871.23 28.0)        // point 2 -> west part Engineering Quad between walls 
+   ( 2072.6 1845.49 44.3)        // point 3 -> west part EQ roof
+   ( 2109.71 1795.15 44.3)        // point 4 -> south-west part EQ roof
+   ( 2261.76 1907.95 44.3)        // point 5 -> east part EQ roof
+   ( 2249.76 1929.91 25.0)        // point 6 -> east part EQ close to pillars 
+   ( 2174.9 2024.67 44.2)        // point 7 -> nort-east EQ roof 
+   ( 2024.11 1912.53 44.2)        // point 8 -> north-west EQ roof 
+   ( 2440.91 2039.27 22.5)        // point 9 -> south-west memorial, roof Restroom
+   ( 2611.71 2203.88 25.0)        // point 10 -> south-easte memorial, close to the wall and ground
+   ( 2515.38 2343.39 39.8)        // point 11 -> north-east memorial roof
+   ( 2449.02 2200.29 28.0)        // point 12 -> north memorial,between walls 
+   ( 2398.24 2101.58 24.5)        // point 13 -> north-west memorial, between walls
+);
+
+// ************************* //
+
